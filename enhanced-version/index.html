@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>محرر فيديو القرآن المطور</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/quran-editor.css">
+    <link rel="stylesheet" href="css/general-editor.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="assets/icons/logo.png" alt="شعار محرر فيديو القرآن" id="logo-image">
+            <h1>محرر فيديو القرآن المطور</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#" class="active" id="quran-editor-tab">محرر فيديو القرآن</a></li>
+                <li><a href="#" id="general-editor-tab">محرر الفيديو العام</a></li>
+                <li><a href="#" id="settings-tab">الإعدادات</a></li>
+                <li><a href="#" id="help-tab">المساعدة</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- محرر فيديو القرآن -->
+        <section id="quran-editor-section" class="editor-section active">
+            <div class="editor-container">
+                <div class="editor-sidebar">
+                    <div class="tool-group">
+                        <h3>أدوات التلاوة</h3>
+                        <div class="tool-buttons">
+                            <button class="tool-button ui-button" data-tool="recitation">
+                                <span class="icon">🎤</span>
+                                <span class="label">التلاوات المميزة</span>
+                            </button>
+                            <button class="tool-button ui-button" data-tool="tajweed">
+                                <span class="icon">📖</span>
+                                <span class="label">التجويد المرئي</span>
+                            </button>
+                            <button class="tool-button ui-button" data-tool="backgrounds">
+                                <span class="icon">🖼️</span>
+                                <span class="label">الخلفيات الإسلامية</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="tool-group">
+                        <h3>أدوات التأثيرات</h3>
+                        <div class="tool-buttons">
+                            <button class="tool-button ui-button" data-tool="verse-effects">
+                                <span class="icon">✨</span>
+                                <span class="label">تأثيرات الآيات</span>
+                            </button>
+                            <button class="tool-button ui-button" data-tool="tafseer">
+                                <span class="icon">📚</span>
+                                <span class="label">التفسير المتكامل</span>
+                            </button>
+                            <button class="tool-button ui-button" data-tool="surah-intro">
+                                <span class="icon">📜</span>
+                                <span class="label">مقدمات السور</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="tool-group">
+                        <h3>أدوات الخط والترجمة</h3>
+                        <div class="tool-buttons">
+                            <button class="tool-button ui-button" data-tool="calligraphy">
+                                <span class="icon">🖋️</span>
+                                <span class="label">الخط العربي</span>
+                            </button>
+                            <button class="tool-button ui-button" data-tool="translation">
+                                <span class="icon">🌐</span>
+                                <span class="label">الترجمة كلمة بكلمة</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="tool-group">
+                        <h3>الابتكارات الذكية</h3>
+                        <div class="tool-buttons">
+                            <button class="tool-button ui-button" data-tool="ai-recognition">
+                                <span class="icon">🔍</span>
+                                <span class="label">التعرف التلقائي على الآيات</span>
+                            </button>
+                            <button class="tool-button ui-button" data-tool="ai-backgrounds">
+                                <span class="icon">🎨</span>
+                                <span class="label">توليد الخلفيات بالذكاء الاصطناعي</span>
+                            </button>
+                            <button class="tool-button ui-button" data-tool="ai-audio">
+                                <span class="icon">🔊</span>
+                                <span class="label">تحسين الصوت الذكي</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="editor-main">
+                    <div class="preview-container">
+                        <div id="quran-editor-canvas" class="editor-canvas">
+                            <div class="placeholder-content">
+                                <h2>بسم الله الرحمن الرحيم</h2>
+                                <p>قم باختيار أدوات التحرير من القائمة الجانبية</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-container">
+                        <div class="timeline-controls">
+                            <button class="control-button ui-button" data-control="play">
+                                <span class="icon">▶️</span>
+                            </button>
+                            <button class="control-button ui-button" data-control="pause">
+                                <span class="icon">⏸️</span>
+                            </button>
+                            <button class="control-button ui-button" data-control="stop">
+                                <span class="icon">⏹️</span>
+                            </button>
+                            <div class="timeline-progress">
+                                <div class="progress-bar"></div>
+                            </div>
+                            <span class="time-display">00:00 / 00:00</span>
+                        </div>
+                        <div id="quran-timeline" class="timeline">
+                            <div class="timeline-track audio-track">
+                                <div class="track-label">الصوت</div>
+                                <div class="track-content"></div>
+                            </div>
+                            <div class="timeline-track effects-track">
+                                <div class="track-label">التأثيرات</div>
+                                <div class="track-content"></div>
+                            </div>
+                            <div class="timeline-track text-track">
+                                <div class="track-label">النصوص</div>
+                                <div class="track-content"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="editor-panels">
+                    <div class="panel" id="recitation-panel">
+                        <h3>التلاوات المميزة</h3>
+                        <div id="quran-recitations-container" class="panel-content">
+                            <p>جاري تحميل التلاوات...</p>
+                        </div>
+                    </div>
+
+                    <div class="panel" id="backgrounds-panel">
+                        <h3>الخلفيات الإسلامية</h3>
+                        <div id="islamic-backgrounds-container" class="panel-content grid-layout">
+                            <p>جاري تحميل الخلفيات...</p>
+                        </div>
+                    </div>
+
+                    <!-- المزيد من لوحات الأدوات -->
+                </div>
+            </div>
+        </section>
+
+        <!-- محرر الفيديو العام -->
+        <section id="general-editor-section" class="editor-section">
+            <div class="editor-container">
+                <div class="editor-sidebar">
+                    <div class="tool-group">
+                        <h3>أدوات التحرير الأساسية</h3>
+                        <div class="tool-buttons">
+                            <button class="tool-button general-ui-button" data-tool="trimming">
+                                <span class="icon">✂️</span>
+                                <span class="label">قص الفيديو</span>
+                            </button>
+                            <button class="tool-button general-ui-button" data-tool="audio">
+                                <span class="icon">🎵</span>
+                                <span class="label">تحرير الصوت</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="tool-group">
+                        <h3>أدوات التأثيرات</h3>
+                        <div class="tool-buttons">
+                            <button class="tool-button general-ui-button" data-tool="filters">
+                                <span class="icon">🎞️</span>
+                                <span class="label">الفلاتر والتأثيرات</span>
+                            </button>
+                            <button class="tool-button general-ui-button" data-tool="text">
+                                <span class="icon">📝</span>
+                                <span class="label">إضافة النصوص</span>
+                            </button>
+                            <button class="tool-button general-ui-button" data-tool="stickers">
+                                <span class="icon">🏷️</span>
+                                <span class="label">الملصقات والطبقات</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="tool-group">
+                        <h3>أدوات متقدمة</h3>
+                        <div class="tool-buttons">
+                            <button class="tool-button general-ui-button" data-tool="transitions">
+                                <span class="icon">🔄</span>
+                                <span class="label">الانتقالات</span>
+                            </button>
+                            <button class="tool-button general-ui-button" data-tool="chroma">
+                                <span class="icon">🎬</span>
+                                <span class="label">الكروما كي</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="tool-group">
+                        <h3>الابتكارات الذكية</h3>
+                        <div class="tool-buttons">
+                            <button class="tool-button general-ui-button" data-tool="ai-format">
+                                <span class="icon">💡</span>
+                                <span class="label">التوصيات الذكية للتنسيقات</span>
+                            </button>
+                            <button class="tool-button general-ui-button" data-tool="voice-command">
+                                <span class="icon">🎤</span>
+                                <span class="label">التحرير بالأوامر الصوتية</span>
+                            </button>
+                            <button class="tool-button general-ui-button" data-tool="scene-analyzer">
+                                <span class="icon">🔍</span>
+                                <span class="label">التحليل الذكي للمشاهد</span>
+                            </button>
+                            <button class="tool-button general-ui-button" data-tool="auto-editing">
+                                <span class="icon">🤖</span>
+                                <span class="label">المونتاج التلقائي وتتبع الحركة</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="editor-main">
+                    <div class="preview-container">
+                        <div id="general-video-preview" class="editor-canvas">
+                            <div class="placeholder-content">
+                                <h2>محرر الفيديو العام</h2>
+                                <p>قم باختيار أدوات التحرير من القائمة الجانبية</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-container">
+                        <div class="timeline-controls">
+                            <button class="control-button general-ui-button" data-control="play">
+                                <span class="icon">▶️</span>
+                            </button>
+                            <button class="control-button general-ui-button" data-control="pause">
+                                <span class="icon">⏸️</span>
+                            </button>
+                            <button class="control-button general-ui-button" data-control="stop">
+                                <span class="icon">⏹️</span>
+                            </button>
+                            <div class="timeline-progress">
+                                <div class="progress-bar"></div>
+                            </div>
+                            <span class="time-display">00:00 / 00:00</span>
+                        </div>
+                        <div id="general-timeline" class="timeline">
+                            <div class="timeline-track video-track">
+                                <div class="track-label">الفيديو</div>
+                                <div class="track-content"></div>
+                            </div>
+                            <div class="timeline-track audio-track">
+                                <div class="track-label">الصوت</div>
+                                <div class="track-content"></div>
+                            </div>
+                            <div class="timeline-track effects-track">
+                                <div class="track-label">التأثيرات</div>
+                                <div class="track-content"></div>
+                            </div>
+                            <div class="timeline-track text-track">
+                                <div class="track-label">النصوص</div>
+                                <div class="track-content"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="editor-panels">
+                    <div class="panel" id="filters-panel">
+                        <h3>الفلاتر والتأثيرات</h3>
+                        <div id="general-filters-container" class="panel-content grid-layout">
+                            <p>جاري تحميل الفلاتر...</p>
+                        </div>
+                    </div>
+
+                    <div class="panel" id="transitions-panel">
+                        <h3>الانتقالات</h3>
+                        <div id="general-transitions-container" class="panel-content grid-layout">
+                            <p>جاري تحميل الانتقالات...</p>
+                        </div>
+                    </div>
+
+                    <!-- المزيد من لوحات الأدوات -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>محرر فيديو القرآن المطور - الإصدار 2.0</p>
+            <p>جميع الحقوق محفوظة &copy; 2025</p>
+        </div>
+    </footer>
+
+    <!-- تحميل ملفات JavaScript -->
+    <script type="module" src="js/main.js"></script>
+    <script type="module" src="js/assets-integration.js"></script>
+    <script type="module" src="js/general-assets-integration.js"></script>
+    <script type="module" src="js/integration-test.js"></script>
+</body>
+</html>

@@ -1,0 +1,472 @@
+/* 
+ * الأنماط الرئيسية لمحرر فيديو القرآن المطور
+ */
+
+:root {
+  --primary-color: #1e88e5;
+  --secondary-color: #43a047;
+  --accent-color: #ff9800;
+  --dark-color: #263238;
+  --light-color: #f5f5f5;
+  --text-color: #212121;
+  --text-light: #ffffff;
+  --border-color: #e0e0e0;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --success-color: #4caf50;
+  --error-color: #f44336;
+  --warning-color: #ff9800;
+  --info-color: #2196f3;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Cairo', 'Amiri', sans-serif;
+  color: var(--text-color);
+  background-color: var(--light-color);
+  line-height: 1.6;
+  direction: rtl;
+}
+
+/* تنسيق الرأس */
+header {
+  background-color: var(--dark-color);
+  color: var(--text-light);
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 5px var(--shadow-color);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo img {
+  height: 40px;
+  margin-left: 1rem;
+}
+
+.logo h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+}
+
+nav ul li {
+  margin-right: 1.5rem;
+}
+
+nav ul li a {
+  color: var(--text-light);
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+nav ul li a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+nav ul li a.active {
+  background-color: var(--primary-color);
+}
+
+/* تنسيق المحتوى الرئيسي */
+main {
+  padding: 2rem;
+  min-height: calc(100vh - 140px);
+}
+
+.editor-section {
+  display: none;
+}
+
+.editor-section.active {
+  display: block;
+}
+
+.editor-container {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  grid-template-rows: 1fr auto;
+  grid-template-areas:
+    "sidebar main"
+    "sidebar panels";
+  gap: 1rem;
+  height: calc(100vh - 200px);
+}
+
+/* تنسيق الشريط الجانبي */
+.editor-sidebar {
+  grid-area: sidebar;
+  background-color: var(--light-color);
+  border-radius: 8px;
+  box-shadow: 0 2px 10px var(--shadow-color);
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+.tool-group {
+  margin-bottom: 1.5rem;
+}
+
+.tool-group h3 {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  color: var(--dark-color);
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 0.5rem;
+}
+
+.tool-buttons {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
+}
+
+.tool-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background-color: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tool-button:hover {
+  background-color: var(--light-color);
+  transform: translateY(-2px);
+  box-shadow: 0 2px 5px var(--shadow-color);
+}
+
+.tool-button .icon {
+  font-size: 1.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.tool-button .label {
+  font-size: 0.75rem;
+  text-align: center;
+}
+
+/* تنسيق منطقة المحرر الرئيسية */
+.editor-main {
+  grid-area: main;
+  display: flex;
+  flex-direction: column;
+}
+
+.preview-container {
+  flex: 1;
+  background-color: #000;
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+}
+
+.editor-canvas {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  background-size: cover;
+  background-position: center;
+}
+
+.placeholder-content {
+  text-align: center;
+  padding: 2rem;
+}
+
+.timeline-container {
+  margin-top: 1rem;
+  background-color: var(--light-color);
+  border-radius: 8px;
+  box-shadow: 0 2px 10px var(--shadow-color);
+  padding: 1rem;
+}
+
+.timeline-controls {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.control-button {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.control-button:hover {
+  background-color: #1976d2;
+}
+
+.timeline-progress {
+  flex: 1;
+  height: 10px;
+  background-color: #e0e0e0;
+  border-radius: 5px;
+  margin: 0 1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0%;
+  background-color: var(--primary-color);
+  border-radius: 5px;
+}
+
+.time-display {
+  font-size: 0.875rem;
+  color: var(--dark-color);
+  font-family: monospace;
+}
+
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.timeline-track {
+  display: flex;
+  height: 40px;
+  background-color: white;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.track-label {
+  width: 80px;
+  background-color: var(--dark-color);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+}
+
+.track-content {
+  flex: 1;
+  position: relative;
+  background-color: #f0f0f0;
+}
+
+/* تنسيق لوحات الأدوات */
+.editor-panels {
+  grid-area: panels;
+  background-color: var(--light-color);
+  border-radius: 8px;
+  box-shadow: 0 2px 10px var(--shadow-color);
+  padding: 1rem;
+  overflow-y: auto;
+  max-height: 300px;
+}
+
+.panel {
+  display: none;
+}
+
+.panel.active {
+  display: block;
+}
+
+.panel h3 {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  color: var(--dark-color);
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 0.5rem;
+}
+
+.panel-content {
+  padding: 0.5rem;
+}
+
+.grid-layout {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 1rem;
+}
+
+/* تنسيق التذييل */
+footer {
+  background-color: var(--dark-color);
+  color: var(--text-light);
+  padding: 1rem 2rem;
+  text-align: center;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* تنسيقات الاستجابة */
+@media (max-width: 992px) {
+  .editor-container {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "main"
+      "sidebar"
+      "panels";
+  }
+  
+  .editor-sidebar {
+    max-height: 200px;
+  }
+}
+
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    padding: 1rem;
+  }
+  
+  .logo {
+    margin-bottom: 1rem;
+  }
+  
+  nav ul {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  nav ul li {
+    margin: 0.25rem;
+  }
+  
+  main {
+    padding: 1rem;
+  }
+}
+
+/* تنسيقات الفلاتر */
+.filter-normal {
+  filter: none;
+}
+
+.filter-sepia {
+  filter: sepia(100%);
+}
+
+.filter-grayscale {
+  filter: grayscale(100%);
+}
+
+.filter-high-contrast {
+  filter: contrast(150%);
+}
+
+.filter-brightness {
+  filter: brightness(130%);
+}
+
+.filter-saturation {
+  filter: saturate(180%);
+}
+
+/* تنسيقات الانتقالات */
+.transition-marker {
+  position: absolute;
+  width: 4px;
+  height: 100%;
+  background-color: var(--accent-color);
+}
+
+.transition-fade {
+  background-color: #9c27b0;
+}
+
+.transition-wipe {
+  background-color: #e91e63;
+}
+
+.transition-split {
+  background-color: #ff5722;
+}
+
+.transition-rotate {
+  background-color: #795548;
+}
+
+.transition-zoom {
+  background-color: #607d8b;
+}
+
+/* تنسيقات العناصر المختلفة */
+.background-item {
+  height: 80px;
+  border-radius: 4px;
+  background-size: cover;
+  background-position: center;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  border: 2px solid transparent;
+}
+
+.background-item:hover {
+  transform: scale(1.05);
+  border-color: var(--primary-color);
+}
+
+.recitation-item {
+  padding: 0.5rem;
+  background-color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.recitation-item:hover {
+  background-color: #f0f0f0;
+}
+
+.filter-item, .transition-item {
+  padding: 0.5rem;
+  background-color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+.filter-item:hover, .transition-item:hover {
+  background-color: #f0f0f0;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 5px var(--shadow-color);
+}
